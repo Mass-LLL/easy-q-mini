@@ -1,0 +1,43 @@
+<view class="page">
+  <view wx:if="{{offline}}" class="warn">
+    未连接到服务器，客人暂时无法取号。请检查网络。
+  </view>
+
+  <view class="qr-card">
+    <canvas wx:if="{{!ended}}" id="qr" type="2d" class="qr"></canvas>
+    <view wx:else class="qr-gone">二维码已失效</view>
+    <view class="qr-tip">{{ended ? '这个队列已经超过 24 小时，请新建一个' : '请客人在「EasyQ」小程序里扫码取号'}}</view>
+  </view>
+
+  <!-- 已叫到 / 等待中在同步完成前都还不知道：called 不存本地，进页面时是 0，
+       waiting 又是拿本地峰值垫的。显示「—」比显示一个会跳变的数字诚实。
+       已取号用的是本地峰值，那是个只涨不跌的下界，随时都能看。见 host.js sync() -->
+  <view class="stats">
+    <view class="stat">
+      <view class="stat-num">{{synced || ended ? called : '—'}}</view>
+      <view class="stat-label">已叫到</view>
+    </view>
+    <view class="stat">
+      <view class="stat-num">{{synced || ended ? waiting : '—'}}</view>
+      <view class="stat-label">等待中</view>
+    </view>
+    <view class="stat">
+      <view class="stat-num">{{total}}</view>
+      <view class="stat-label">已取号</view>
+    </view>
+  </view>
+
+  <view wx:if="{{!ended}}" class="recount">
+    <text wx:if="{{counting}}" class="recount-busy">正在重新统计…</text>
+    <text wx:else class="recount-btn" bindtap="recount">人数不对？重新统计</text>
+  </view>
+
+  <!-- 同步完成前按钮必须是锁的：那会儿 called 还是 0，点下去发出的 1 会把 broker 上
+       唯一的 c 槽位改小，后来订阅的客人就看到「已叫到 1 号」。见 host.js sync() -->
+  <view class="footer">
+    <button class="primary" bindtap="callNext" loading="{{busy}}" disabled="{{ended || !synced || waiting === 0 || busy}}">
+      {{ended ? '队列已结束' : (!synced ? '正在同步…' : (waiting === 0 ? '暂无等待' : '叫下一位（' + next + ' 号）'))}}
+    </button>
+    <view class="hint">队列和二维码 24 小时后自动失效</view>
+  </view>
+</view>

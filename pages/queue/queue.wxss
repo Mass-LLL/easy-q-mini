@@ -1,0 +1,89 @@
+/* 「正在排 / 过号」切换 */
+.tabs {
+  display: flex;
+  padding: 8rpx;
+  border-radius: 12rpx;
+  background: #E2E2E2;
+}
+
+.tab {
+  flex: 1;
+  padding: 14rpx 0;
+  border-radius: 10rpx;
+  color: #666;
+  font-size: 28rpx;
+  text-align: center;
+}
+
+.tab-on {
+  background: #FFFFFF;
+  color: #191919;
+}
+
+.tip {
+  padding: 20rpx 8rpx 0;
+  color: #888;
+  font-size: 24rpx;
+}
+
+.ticket {
+  margin-bottom: 16rpx;
+  padding: 28rpx;
+  border-radius: 16rpx;
+  background: #FFFFFF;
+}
+
+.ticket-arrived {
+  background: #E8F8EE;
+}
+
+/* 过号/已结束：整张票压暗，不是错误态，只是不再推进 */
+.ticket-over {
+  color: #999;
+}
+
+.ticket-head {
+  display: flex;
+  align-items: center;
+  padding-bottom: 20rpx;
+  border-bottom: 1rpx solid #EEEEEE;
+}
+
+.ticket-name {
+  flex: 1;
+  font-size: 30rpx;
+  color: #555;
+}
+
+/* 只在「重试若干次仍没取到号」时出现 */
+.ticket-retry {
+  padding: 4rpx 12rpx;
+  color: #576B95;
+  font-size: 26rpx;
+}
+
+.ticket-body {
+  display: flex;
+  align-items: center;
+  padding-top: 24rpx;
+}
+
+.ticket-num {
+  min-width: 180rpx;
+  font-size: 88rpx;
+  line-height: 1;
+}
+
+.ticket-info {
+  flex: 1;
+}
+
+.ticket-status {
+  font-size: 34rpx;
+}
+
+.ticket-called {
+  padding-top: 8rpx;
+  color: #888;
+  font-size: 24rpx;
+}

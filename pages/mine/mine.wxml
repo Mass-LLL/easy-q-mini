@@ -1,0 +1,41 @@
+<view class="page" bindtap="closeSwipe">
+  <view wx:if="{{!configured}}" class="warn">
+    尚未配置 MQTT 服务器，请填写 utils/config.js
+  </view>
+
+  <block wx:for="{{groups}}" wx:key="day" wx:for-item="group">
+    <view class="day">{{group.day}}</view>
+    <view class="row {{openSid === q.s ? 'row-open' : ''}}"
+          wx:for="{{group.items}}" wx:key="s" wx:for-item="q" data-sid="{{q.s}}"
+          bindtouchstart="onSwipeStart" bindtouchmove="onSwipeMove" bindtouchend="onSwipeEnd">
+      <view class="card" bindtap="openQueue" data-sid="{{q.s}}">
+        <view class="card-name">{{q.n}}</view>
+        <view wx:if="{{q.ended}}" class="card-tag">已失效</view>
+        <view class="card-arrow">›</view>
+      </view>
+      <view class="row-del" catchtap="removeQueue" data-sid="{{q.s}}">删除</view>
+    </view>
+  </block>
+
+  <view wx:if="{{groups.length === 0}}" class="empty">还没有创建过队列</view>
+
+  <view class="footer">
+    <button class="primary" bindtap="openCreate" disabled="{{atLimit}}">
+      <view class="ico ico-plus"></view>新建队列
+    </button>
+    <view wx:if="{{atLimit}}" class="hint">今天已创建 {{maxPerDay}} 个队列，达到上限</view>
+    <view wx:else class="hint">队列和二维码 24 小时后自动失效</view>
+  </view>
+
+  <view wx:if="{{creating}}" class="mask" catchtap="cancelCreate">
+    <view class="dialog" catchtap="noop">
+      <view class="dialog-title">新建队列</view>
+      <input class="input" placeholder="队列名，如「大厅」" value="{{name}}"
+             bindinput="onNameInput" maxlength="20" focus />
+      <view class="dialog-actions">
+        <button class="ghost" bindtap="cancelCreate">取消</button>
+        <button class="primary" bindtap="create" loading="{{busy}}" disabled="{{busy}}">创建</button>
+      </view>
+    </view>
+  </view>
+</view>

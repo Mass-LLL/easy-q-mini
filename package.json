@@ -1,0 +1,22 @@
+{
+  "name": "easy-q-mini",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "node test/logic.test.js && node test/protocol.test.js && node test/resilience.test.js",
+    "vendor:mqtt": "node scripts/vendor-mqtt.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "dayjs": "^1.11.21"
+  },
+  "_comment": "mqtt / qrcode-generator 是 vendor 进 libs/ 的（见 DESIGN.md），放 devDependencies 是为了让「构建 npm」不去处理它们；升级时从 node_modules 重新拷一份到 libs/",
+  "devDependencies": {
+    "mqtt": "^4.3.8",
+    "qrcode-generator": "^2.0.4"
+  }
+}

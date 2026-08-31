@@ -1,0 +1,52 @@
+<view class="page">
+  <view wx:if="{{!configured}}" class="warn">
+    尚未配置 MQTT 服务器，请填写 utils/config.js
+  </view>
+  <view wx:elif="{{offline}}" class="warn">
+    未连接到服务器，号码可能不是最新的。
+  </view>
+
+  <view class="tabs">
+    <view class="tab {{tab === 'active' ? 'tab-on' : ''}}" bindtap="switchTab" data-tab="active">
+      正在排（{{activeCount}}）
+    </view>
+    <view class="tab {{tab === 'over' ? 'tab-on' : ''}}" bindtap="switchTab" data-tab="over">
+      过号（{{overCount}}）
+    </view>
+  </view>
+
+  <view wx:if="{{tab === 'over' && groups.length > 0}}" class="tip">
+    过号了先找店员说明，一般还能优先安排
+  </view>
+
+  <block wx:for="{{groups}}" wx:key="day" wx:for-item="group">
+    <view class="day">{{group.day}}</view>
+    <view class="ticket {{item.arrived ? 'ticket-arrived' : ''}} {{item.over ? 'ticket-over' : ''}}"
+          wx:for="{{group.items}}" wx:key="s">
+      <view class="ticket-head">
+        <view class="ticket-name">{{item.name}}</view>
+        <view wx:if="{{item.failed}}" class="ticket-retry" catchtap="rescan" data-sid="{{item.s}}">
+          重新扫码
+        </view>
+      </view>
+      <view class="ticket-body">
+        <view class="ticket-num">{{item.num}}</view>
+        <view class="ticket-info">
+          <view class="ticket-status">{{item.status}}</view>
+          <view wx:if="{{item.showCalled}}" class="ticket-called">已叫到 {{item.called}} 号</view>
+        </view>
+      </view>
+    </view>
+  </block>
+
+  <view wx:if="{{groups.length === 0}}" class="empty">
+    {{tab === 'active' ? '还没有排过队，扫码取号试试' : '没有过号的记录'}}
+  </view>
+
+  <view class="footer">
+    <button class="primary" bindtap="scan" loading="{{busy}}" disabled="{{busy}}">
+      <view class="ico ico-scan"></view>扫码取号
+    </button>
+    <view class="hint">取了号就像拿了张小票，不能取消；号码只保留 3 天</view>
+  </view>
+</view>

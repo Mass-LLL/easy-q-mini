@@ -1,0 +1,40 @@
+/* 布局与组件样式在 app.wxss 中共享 */
+
+/* 左滑删除：外层裁掉溢出，卡片左移露出后面的删除块 */
+.row {
+  position: relative;
+  /* z-index: 0 把卡片和删除块的层级关系关在这一行内部，不会越过 footer */
+  z-index: 0;
+  overflow: hidden;
+  margin-bottom: 16rpx;
+  border-radius: 16rpx;
+}
+
+.row .card {
+  /* 卡片必须盖在删除块上面：两者都定过位，不指定 z-index 时后写的删除块会压住卡片 */
+  position: relative;
+  z-index: 1;
+  margin-bottom: 0;
+  border-radius: 0;
+  transform: translateX(0);
+  transition: transform 0.2s ease;
+}
+
+.row-open .card {
+  transform: translateX(-160rpx);
+}
+
+.row-del {
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 160rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #FA5151;
+  color: #FFFFFF;
+  font-size: 28rpx;
+}

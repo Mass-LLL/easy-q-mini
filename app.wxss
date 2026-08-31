@@ -1,0 +1,205 @@
+page {
+  background-color: #EDEDED;
+  color: #191919;
+  font-size: 32rpx;
+}
+
+.page {
+  min-height: 100vh;
+  padding: 24rpx 24rpx 220rpx;
+  box-sizing: border-box;
+}
+
+/* 分组标题 / 空态 / 提示 */
+.day {
+  padding: 24rpx 8rpx 12rpx;
+  color: #888;
+  font-size: 26rpx;
+}
+
+.empty {
+  padding: 160rpx 0;
+  text-align: center;
+  color: #999;
+}
+
+.hint {
+  padding: 16rpx 8rpx 0;
+  color: #999;
+  font-size: 24rpx;
+  text-align: center;
+}
+
+.warn {
+  margin-bottom: 16rpx;
+  padding: 20rpx 24rpx;
+  border-radius: 12rpx;
+  background: #FFF3E0;
+  color: #A05A00;
+  font-size: 26rpx;
+}
+
+/* 卡片 */
+.card {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16rpx;
+  padding: 32rpx 28rpx;
+  border-radius: 16rpx;
+  background: #FFFFFF;
+}
+
+.card-name {
+  flex: 1;
+  font-size: 34rpx;
+}
+
+/* 「已失效」之类的行内小标签 */
+.card-tag {
+  margin-right: 12rpx;
+  padding: 4rpx 12rpx;
+  border-radius: 6rpx;
+  background: #F2F2F2;
+  color: #999;
+  font-size: 22rpx;
+}
+
+.card-arrow {
+  color: #C8C8C8;
+  font-size: 40rpx;
+}
+
+/* 按钮 */
+button.primary {
+  background: #07C160;
+  color: #FFFFFF;
+  border-radius: 12rpx;
+}
+
+button.primary[disabled] {
+  background: #9BDFBB;
+  color: #FFFFFF;
+}
+
+button.ghost {
+  background: #FFFFFF;
+  color: #576B95;
+  border-radius: 12rpx;
+}
+
+/* 按钮里的线框图标。纯 CSS 画，不引图片：仓库的二进制资源走 LFS，为两个图标不值得。
+   描边用 currentColor，所以按钮禁用变色时图标会跟着变 */
+.ico {
+  display: inline-block;
+  position: relative;
+  width: 30rpx;
+  height: 30rpx;
+  margin-right: 12rpx;
+  vertical-align: -4rpx;
+}
+
+/* 扫码：取景框的上下两边 + 侧边短脚，加一道居中的扫描线 */
+.ico-scan {
+  background: linear-gradient(currentColor, currentColor) center / 100% 4rpx no-repeat;
+}
+
+.ico-scan::before,
+.ico-scan::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 10rpx;
+  border-left: 4rpx solid currentColor;
+  border-right: 4rpx solid currentColor;
+}
+
+.ico-scan::before {
+  top: 0;
+  border-top: 4rpx solid currentColor;
+}
+
+.ico-scan::after {
+  bottom: 0;
+  border-bottom: 4rpx solid currentColor;
+}
+
+/* 新建：加号 */
+.ico-plus::before,
+.ico-plus::after {
+  content: '';
+  position: absolute;
+  background: currentColor;
+}
+
+.ico-plus::before {
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 4rpx;
+  margin-top: -2rpx;
+}
+
+.ico-plus::after {
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 4rpx;
+  margin-left: -2rpx;
+}
+
+/* 底部固定操作区。z-index 必须高于列表：列表里的卡片为了盖住左滑删除块自己开了
+   层叠上下文，不显式抬高 footer 的话，卡片会压在按钮上面、只从卡片间距里漏出按钮 */
+.footer {
+  position: fixed;
+  z-index: 10;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 24rpx 32rpx calc(24rpx + env(safe-area-inset-bottom));
+  background: #EDEDED;
+}
+
+/* 弹窗，要盖住 footer */
+.mask {
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.45);
+}
+
+.dialog {
+  width: 600rpx;
+  padding: 40rpx 32rpx 24rpx;
+  border-radius: 20rpx;
+  background: #FFFFFF;
+}
+
+.dialog-title {
+  margin-bottom: 32rpx;
+  font-size: 34rpx;
+  text-align: center;
+}
+
+.dialog-actions {
+  display: flex;
+  gap: 20rpx;
+  margin-top: 32rpx;
+}
+
+.dialog-actions button {
+  flex: 1;
+  margin: 0;
+}
+
+.input {
+  padding: 20rpx 24rpx;
+  border-radius: 12rpx;
+  background: #F5F5F5;
+}

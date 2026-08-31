@@ -1,0 +1,73 @@
+.qr-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 48rpx 0 32rpx;
+  border-radius: 16rpx;
+  background: #FFFFFF;
+}
+
+/* 逻辑尺寸需与 host.js 里传给 qr.drawTo 的 220 一致 */
+.qr {
+  width: 220px;
+  height: 220px;
+}
+
+/* 失效队列的占位，尺寸与 .qr 一致，免得卡片高度跳一下 */
+.qr-gone {
+  display: flex;
+  width: 220px;
+  height: 220px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16rpx;
+  background: #F2F2F2;
+  color: #999;
+  font-size: 28rpx;
+}
+
+.qr-tip {
+  padding-top: 28rpx;
+  color: #888;
+  font-size: 26rpx;
+}
+
+.stats {
+  display: flex;
+  margin-top: 16rpx;
+  border-radius: 16rpx;
+  background: #FFFFFF;
+}
+
+.stat {
+  flex: 1;
+  padding: 36rpx 0;
+  text-align: center;
+}
+
+.stat-num {
+  font-size: 56rpx;
+  line-height: 1.2;
+}
+
+.stat-label {
+  padding-top: 8rpx;
+  color: #888;
+  font-size: 24rpx;
+}
+
+/* 「重新统计」：客人的人数上报丢了的兜底入口，见 host.js recount */
+.recount {
+  padding: 20rpx 0 0;
+  text-align: center;
+}
+
+.recount-btn,
+.recount-busy {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.recount-btn {
+  color: #576B95;
+}
